@@ -79,7 +79,7 @@ pipeline {
                 archiveArtifacts artifacts: 'data/jobs.csv, public/index.html, logs/log.txt', allowEmptyArchive: true
             }
         }
-
+		
 		stage('Deploy') {
 			steps {
 				script {
@@ -96,15 +96,15 @@ pipeline {
 					sh 'git add index.html'
 					sh 'git commit -m "Deploy to GitHub Pages"'
 
-					// Use the Git credentials configured in Jenkins
+					// Push Git gh-pages
 					sh 'git push origin gh-pages --force'
-					
+
 					// 5. Switch back to the original branch
 					sh 'git checkout -'
 				}
-			}
+			}		
 		}
-
+	}
     triggers {
         // Example: Trigger every 6 hours
         cron('H */6 * * *')
