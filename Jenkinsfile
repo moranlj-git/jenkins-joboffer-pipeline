@@ -88,8 +88,8 @@ pipeline {
 		stage('Deploy') {
 			steps {
 				script {
-					// 1. Checkout the gh-pages branch (or create it if it doesn't exist)
-					sh 'git checkout --orphan gh-pages'
+					// 1. Checkout the gh-pages branch 
+					sh 'git checkout gh-pages'
 
 					// 2. Copy the index.html file to the gh-pages branch
 					sh 'cp public/index.html .'
