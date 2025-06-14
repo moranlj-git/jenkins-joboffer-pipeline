@@ -92,10 +92,10 @@ pipeline {
 					sh 'git checkout gh-pages'
 
 					// 2. Copy the index.html file to the gh-pages branch
-					sh 'cp public/index.html .'
+					//sh 'cp public/index.html .'
 
 					// 3. Add, commit, and push the changes to the gh-pages branch
-					sh 'git add index.html'
+					sh 'git add public/index.html'
 					sh 'git commit -m "Deploy to GitHub Pages"'
 
 					// 4. Push Git gh-pages
