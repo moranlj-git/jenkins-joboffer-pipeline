@@ -52,14 +52,14 @@ pipeline {
         stage('DetectChanges') {
             steps {
                 script {
-                    def jobsCsvExists = fileExists('jobs_previous.csv')
+                    def jobsCsvExists = fileExists('data/jobs_previous.csv')
 
                     if (!jobsCsvExists) {
                         echo "No previous jobs.csv found.  Proceeding."
-                        sh 'cp data/jobs.csv jobs_previous.csv'
+                        sh 'cp data/jobs.csv data/jobs_previous.csv'
                     } else {
                         def md5Current = sh(script: 'md5sum data/jobs.csv | cut -d " " -f 1', returnStdout: true).trim()
-                        def md5Previous = sh(script: 'md5sum jobs_previous.csv | cut -d " " -f 1', returnStdout: true).trim()
+                        def md5Previous = sh(script: 'md5sum data/jobs_previous.csv | cut -d " " -f 1', returnStdout: true).trim()
 
                         if (md5Current == md5Previous) {
                             echo "Aucune nouvelle offre. Terminating pipeline."
@@ -67,7 +67,7 @@ pipeline {
                             return
                         } else {
                             echo "Changes detected.  Proceeding."
-                            sh 'cp data/jobs.csv jobs_previous.csv'
+                            sh 'cp data/jobs.csv data/jobs_previous.csv'
                         }
                     }
                 }
