@@ -89,10 +89,13 @@ pipeline {
 			steps {
 				script {
 					// 1. Checkout the gh-pages branch 
-					sh 'git checkout gh-pages'
+					sh 'git status'
 
 					// 2. Copy the index.html file to the gh-pages branch
-					//sh 'cp public/index.html .'
+					sh 'cp public/index.html /tmp/index.html.bak'
+					sh 'git checkout gh-pages'
+					sh 'cp /tmp/index.html.bak public/index.html'
+					 
 
 					// 3. Add, commit, and push the changes to the gh-pages branch
 					sh 'git add public/index.html'
@@ -100,7 +103,7 @@ pipeline {
 
 					// 4. Push Git gh-pages
 					// Use the Git credentials configured in Jenkins
-					sh 'git push origin gh-pages --force'
+					sh 'git push origin gh-pages'
 
 					// 5. Switch back to the original branch
 					sh 'git checkout -'
