@@ -84,32 +84,27 @@ pipeline {
                 archiveArtifacts artifacts: 'data/jobs.csv, public/index.html, logs/log.txt', allowEmptyArchive: true
             }
         }
-		
-		stage('Deploy') {
-			steps {
-				script {
-					// 2. Copy the index.html file to the gh-pages branch
-					sh 'cp public/index.html /tmp/index.html.bak'
-					sh 'mv data/ /tmp/data'
-					sh 'mv public/ /tmp/public'
-					sh 'mv venv/ /tmp/venv'
-					sh 'git checkout gh-pages'
-					sh 'cp /tmp/index.html.bak public/index.html'
 
-					// 3. Add, commit, and push the changes to the gh-pages branch
-					sh 'git add public/index.html'
-					sh 'git commit -m "Deploy to GitHub Pages"'
+	stage('Deploy') {
+		steps {
+			sh '''
+				#!/bin/bash
+				set -e
 
-					// 4. Push Git gh-pages
-					// Use the Git credentials configured in Jenkins
-					sh 'git push origin gh-pages'
+				# The absolute path to your Nginx web directory
+				DEPLOY_PATH="/var/www/html/"
 
-					// 5. Switch back to the original branch
-					sh 'git checkout -'
-				}
-			}		
+				# Ensure the destination directory exists
+				mkdir -p "$DEPLOY_PATH"
+
+				# Copy the file directly
+				cp public/index.html "$DEPLOY_PATH"
+
+				echo "Successfully deployed to $DEPLOY_PATH"
+			'''
 		}
 	}
+    }
     triggers {
         // Example: Trigger every 6 hours
         cron('H */6 * * *')
