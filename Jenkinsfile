@@ -91,17 +91,14 @@ pipeline {
 					// 1. Checkout the gh-pages branch (or create it if it doesn't exist)
 					sh 'git checkout --orphan gh-pages'
 
-					// 2. Remove all existing files in the gh-pages branch
-					sh 'rm -rf .'
-
-					// 3. Copy the index.html file to the gh-pages branch
+					// 2. Copy the index.html file to the gh-pages branch
 					sh 'cp public/index.html .'
 
-					// 4. Add, commit, and push the changes to the gh-pages branch
+					// 3. Add, commit, and push the changes to the gh-pages branch
 					sh 'git add index.html'
 					sh 'git commit -m "Deploy to GitHub Pages"'
 
-					// Push Git gh-pages
+					// 4. Push Git gh-pages
 					sh 'git push origin gh-pages --force'
 
 					// 5. Switch back to the original branch
