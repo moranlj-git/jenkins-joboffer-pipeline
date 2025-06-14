@@ -88,9 +88,6 @@ pipeline {
 		stage('Deploy') {
 			steps {
 				script {
-					// 1. Checkout the gh-pages branch 
-					sh 'git status'
-
 					// 2. Copy the index.html file to the gh-pages branch
 					sh 'cp public/index.html /tmp/index.html.bak'
 					sh 'mv data/ /tmp/data'
