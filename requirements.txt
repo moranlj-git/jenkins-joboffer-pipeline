@@ -1,0 +1,5 @@
+txt
+requests
+beautifulsoup4
+lxml
+pandas
