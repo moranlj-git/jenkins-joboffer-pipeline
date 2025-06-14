@@ -3,19 +3,21 @@ Jenkins Job Offer Pipeline
 1 Préparation (Install)
 
 stage('Preparation') {
-      steps {
-            sh '''
-		python3 -m venv $VENV_DIR
-		. $VENV_DIR/bin/activate
-		pip install --upgrade pip
-		pip install -r requirements.txt
- 		'''
+
+        stage('Preparation') {
+            steps {
+                sh '''
+					python3 -m venv $VENV_DIR
+					. $VENV_DIR/bin/activate
+					pip install --upgrade pip
+					pip install -r requirements.txt
+				'''
             }
         }
 
 2 Scraping
 
- stage('Scraping') {
+        stage('Scraping') {
             steps {
                 script {
                     sh 'python3 scraper.py'
@@ -25,13 +27,13 @@ stage('Preparation') {
 
 3 Transformation HTML
 
-  stage('Conversion') {
-        steps {
-             script {
-                 sh 'python3 html_generator.py'
-             }
-          }
-    }
+        stage('Conversion') {
+            steps {
+                script {
+                    sh 'python3 html_generator.py'
+                }
+            }
+        }
 
 4 Validation / Tests
 
