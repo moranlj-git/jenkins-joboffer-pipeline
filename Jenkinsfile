@@ -100,8 +100,6 @@ pipeline {
 
 					// 4. Push Git gh-pages
 					// Use the Git credentials configured in Jenkins
-					withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'YOUR_GITHUB_CREDENTIALS_ID', usernameVariable: 'moranlj-git', passwordVariable: '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']]) {
-					sh 'git remote set-url origin https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/jenkins-joboffer-pipeline.git'
 					sh 'git push origin gh-pages --force'
 
 					// 5. Switch back to the original branch
