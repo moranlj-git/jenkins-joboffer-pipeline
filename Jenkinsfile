@@ -107,6 +107,6 @@ pipeline {
 
     triggers {
         // Example: Trigger every 6 hours
-        cron('H */6 * * *')
+        cron('H/5 * * * *')
     }
 }
